@@ -19,4 +19,6 @@ from SP_Classes.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',home,name='home'),
+    path('accounts/login/', logins, name='logins'),
+    path('accounts/logout/',logout_view,name='logout'),
 ]
