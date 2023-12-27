@@ -1,0 +1,522 @@
+{% extends "home.html" %}{% load static %}
+{% block content %}
+
+<div class="col-md-2">
+    <a class="btn btn-info btn-darken-3 box-shadow-1 btn-sm square" data-bs-toggle="modal" data-bs-target="#addNewProduct1" >Add Details</a>
+</div>
+<div class="col-md-12">
+    <div class='row'>
+        <div class="col-md-9"></div>
+        
+        <div class="col-md-3">
+            
+            <div style="text-alight:left;">
+                <a class="btn btn-sm btn-info pull-right m-1" data-bs-toggle="modal" data-bs-target="#designationmodalss1"><i class="fa fa-plus"></i>&nbsp;&nbsp;File Upload</a>
+
+                {% comment %} <a href="" class="btn btn-sm btn-danger pull-right m-1"><i class='fa fa-trash'></i>Delete Table</a> {% endcomment %}
+            </div>
+            <br>
+        </div>
+    </div>
+</div>
+<div>
+{% comment %} <h1>Click the button to download the Excel file</h1> {% endcomment %}
+    
+        <button><a href="{% url 'create_and_download_excel' %}" >Download Excel</a></button>
+</div>
+
+{% comment %} New {% endcomment %}
+<ul class="nav nav-tabs nav-line-tabs mb-5 fs-6">
+    <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_9">Class IX</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_10">Class X</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_11">Class XI</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_12">Class XII</a>
+    </li>
+</ul>
+
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade" id="kt_tab_pane_9" role="tabpanel">
+        <div class="table-responsive">
+            <table class="table table-hover table-rounded table-striped border gy-7 gs-7">
+                <thead>
+                    <tr class="fw-semibold fs-6 text-gray-800 border-bottom-2 border-gray-200">
+                        <th>Name</th>
+                        <th>Class</th>
+                        <th>School</th>
+                        <th>DOB</th>
+                        <th>Age</th>
+                        <th>Subject</th>
+                        <th>Father Name</th>
+                        <th>Mother Name</th>
+                        <th>Phone No</th>
+                        <th>Father No</th>
+                        <th>Address</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for AddDetails in data10 %}
+                    <tr>
+                        <td>{{AddDetails.Name}}</td>
+                        <td>{{AddDetails.Class}}</td>
+                        <td>{{AddDetails.School}}</td> 
+                        <td>{{AddDetails.DOB}}</td>  
+                        <td>{{AddDetails.Age}}</td> 
+                        <td>{{AddDetails.Subject}}</td> 
+                        <td>{{AddDetails.Father_name}}</td>
+                        <td>{{AddDetails.Mother_name}}</td>
+                        <td>{{AddDetails.Phone_no}}</td>  
+                        <td>{{AddDetails.Father_phno}}</td> 
+                        <td>{{AddDetails.Address}}</td>
+                        <td>
+                            <a class="passing_idx" data-bs-toggle="modal" data-id="{{AddDetails.id}}" data-bs-target="#editNewProduct1"><i class="fa fa-edit"></i>
+                            </a> 
+                              
+                            <a href="{% url 'delete_details' AddDetails.id %}"><i class = "fa fa-trash"></i></a> 
+            
+                        </td>
+                    
+                    </tr>
+                    {% endfor %} 
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="kt_tab_pane_10" role="tabpanel">
+        <div class="table-responsive">
+            <table class="table table-hover table-rounded table-striped border gy-7 gs-7">
+                <thead>
+                    <tr class="fw-semibold fs-6 text-gray-800 border-bottom-2 border-gray-200">
+                        <th>Name</th>
+                        <th>Class</th>
+                        <th>School</th>
+                        <th>DOB</th>
+                        <th>Age</th>
+                        <th>Subject</th>
+                        <th>Father Name</th>
+                        <th>Mother Name</th>
+                        <th>Phone No</th>
+                        <th>Father No</th>
+                        <th>Address</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for AddDetails in data11 %}
+                    <tr>
+                        <td>{{AddDetails.Name}}</td>
+                        <td>{{AddDetails.Class}}</td>
+                        <td>{{AddDetails.School}}</td> 
+                        <td>{{AddDetails.DOB}}</td>  
+                        <td>{{AddDetails.Age}}</td> 
+                        <td>{{AddDetails.Subject}}</td> 
+                        <td>{{AddDetails.Father_name}}</td>
+                        <td>{{AddDetails.Mother_name}}</td>
+                        <td>{{AddDetails.Phone_no}}</td>  
+                        <td>{{AddDetails.Father_phno}}</td> 
+                        <td>{{AddDetails.Address}}</td>
+                        <td>
+                            <a class="passing_idx" data-bs-toggle="modal" data-id="{{AddDetails.id}}" data-bs-target="#editNewProduct1"><i class="fa fa-edit"></i>
+                            </a> 
+                              
+                            <a href="{% url 'delete_details' AddDetails.id %}"><i class = "fa fa-trash"></i></a> 
+            
+                        </td>
+                    </tr>
+                    {% endfor %} 
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="kt_tab_pane_11" role="tabpanel">
+        <div class="table-responsive">
+            <table class="table table-hover table-rounded table-striped border gy-7 gs-7">
+                <thead>
+                    <tr class="fw-semibold fs-6 text-gray-800 border-bottom-2 border-gray-200">
+                        <th>Name</th>
+                        <th>Class</th>
+                        <th>School</th>
+                        <th>DOB</th>
+                        <th>Age</th>
+                        <th>Subject</th>
+                        <th>Father Name</th>
+                        <th>Mother Name</th>
+                        <th>Phone No</th>
+                        <th>Father No</th>
+                        <th>Address</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for AddDetails in data12 %}
+                    <tr>
+                        <td>{{AddDetails.Name}}</td>
+                        <td>{{AddDetails.Class}}</td>
+                        <td>{{AddDetails.School}}</td> 
+                        <td>{{AddDetails.DOB}}</td>  
+                        <td>{{AddDetails.Age}}</td> 
+                        <td>{{AddDetails.Subject}}</td> 
+                        <td>{{AddDetails.Father_name}}</td>
+                        <td>{{AddDetails.Mother_name}}</td>
+                        <td>{{AddDetails.Phone_no}}</td>  
+                        <td>{{AddDetails.Father_phno}}</td> 
+                        <td>{{AddDetails.Address}}</td>
+                        <td>
+                            <a class="passing_idx" data-bs-toggle="modal" data-id="{{AddDetails.id}}" data-bs-target="#editNewProduct1"><i class="fa fa-edit"></i>
+                            </a> 
+                              
+                            <a href="{% url 'delete_details' AddDetails.id %}"><i class = "fa fa-trash"></i></a> 
+            
+                        </td> 
+                    
+                    </tr>
+                    {% endfor %} 
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="kt_tab_pane_12" role="tabpanel">
+        <div class="table-responsive">
+            <table class="table table-hover table-rounded table-striped border gy-7 gs-7">
+                <thead>
+                    <tr class="fw-semibold fs-6 text-gray-800 border-bottom-2 border-gray-200">
+                        <th>Name</th>
+                        <th>Class</th>
+                        <th>School</th>
+                        <th>DOB</th>
+                        <th>Age</th>
+                        <th>Subject</th>
+                        <th>Father Name</th>
+                        <th>Mother Name</th>
+                        <th>Phone No</th>
+                        <th>Father No</th>
+                        <th>Address</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for AddDetails in data13 %}
+                    <tr>
+                        <td>{{AddDetails.Name}}</td>
+                        <td>{{AddDetails.Class}}</td>
+                        <td>{{AddDetails.School}}</td> 
+                        <td>{{AddDetails.DOB}}</td>  
+                        <td>{{AddDetails.Age}}</td> 
+                        <td>{{AddDetails.Subject}}</td> 
+                        <td>{{AddDetails.Father_name}}</td>
+                        <td>{{AddDetails.Mother_name}}</td>
+                        <td>{{AddDetails.Phone_no}}</td>  
+                        <td>{{AddDetails.Father_phno}}</td> 
+                        <td>{{AddDetails.Address}}</td>
+                        <td>
+                            <a class="passing_idx" data-bs-toggle="modal" data-id="{{AddDetails.id}}" data-bs-target="#editNewProduct1"><i class="fa fa-edit"></i>
+                            </a> 
+                              
+                            <a href="{% url 'delete_details' AddDetails.id %}"><i class = "fa fa-trash"></i></a> 
+            
+                        </td>
+                    
+                    </tr>
+                    {% endfor %} 
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<div id="designationmodalss1" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+    <!-- Modal content-->
+    <form id="form-modal" action="{% url 'studetails_fileupload' %}" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="modal-content">
+            <div class="modal-header with-border modalcolor">
+                <h4 class="modal-title">Upload File</h4>
+                
+            </div>
+            <div class="modal-body">
+                <div class="form-group p-1">
+                    <input type="file" required name="upload_file"  class="form-control" required>
+                  </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-success pull-right Swal_Alert" >Submit</button>
+                <button type="button" class="btn btn-default pull-left" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </form>
+    </div>
+</div>
+
+<div class="modal fade" id="addNewProduct1" role="dialog" aria-labelledby="icc_modal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="documents">
+        <div class="modal-content">
+                {% csrf_token %}
+                <div class="modal-header ">
+                    <h4 class="modal-title ">Add Details</h4>
+                    {% comment %} <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"></span>
+                    </button> {% endcomment %}
+                </div>
+                <div class="modal-body">
+                    <form class="form form-horizontal" action="{% url 'details_save' %}" method="POST" enctype="multipart/form-data">
+                        <div class="form-body">
+                            <div class="row">
+                                <div class="col-3 form-group">
+                                    <label>Name(<span class="text-danger">*</span>)</label>
+                                    
+                                        <input class="form-control" type="text" name="stuname" required>
+                                    <br>
+                                </div>
+                                <div class="col-3 form-group">
+                                    <label>Class(<span class="text-danger">*</span>)</label>                                    
+                                        <select class="form-control" type="text" name="stuclass" required>
+                                            <option value="" selected="" >Select Class</option> 
+                                            <option value="I">I</option>
+                                            <option value="II">II</option>
+                                            <option value="III">III</option>
+                                            <option value="IV">IV</option>
+                                            <option value="V">V</option> 
+                                            <option value="VI">VI</option>
+                                            <option value="VII">VII</option>
+                                            <option value="VIII">VIII</option>
+                                            <option value="IX">IX</option>
+                                            <option value="X">X</option>
+                                            <option value="XI">XI</option>
+                                            <option value="XII">XII</option>
+                                        </select>                                    
+                                </div>
+                                <div class="col-3 form-group">
+                                    <label>School(<span class="text-danger">*</span>)</label>                                    
+                                        <input class="form-control" type="text" name="stuschool" required>                                    
+                                </div>
+                                <div class="col-3 form-group">
+                                    <label>DOB(<span class="text-danger">*</span>)</label>                                    
+                                        <input class="form-control" type="date" name="dob" required>                                    
+                                </div>
+                                <div class="col-3 form-group">
+                                    <label>Age(<span class="text-danger">*</span>)</label>                                    
+                                        <input class="form-control" type="text" name="age" required>                                    
+                                </div>
+                                <div class="col-3 form-group">
+                                    <label>Subject(<span class="text-danger">*</span>)</label>                                    
+                                        <select class="form-select" data-control="select2"  name="stusubject" multiple="multiple">
+                                            <option value="">Select</option> 
+                                            <option value="All">All</option>
+                                            <option value="English">English</option>
+                                            <option value="Tamil">Tamil</option>
+                                            <option value="Maths">Maths</option>
+                                            <option value="Science">Science</option> 
+                                            <option value="Social">Social</option>
+                                            <option value="Physics">Physics</option>
+                                            <option value="Chemistry">Chemistry</option>
+                                            <option value="Biology">Biology</option>
+                                            <option value="Computer Scinece">Computer Scinece</option>
+                                        </select>                                    
+                                </div>
+                                <div class="col-3 form-group">
+                                    <label>Father Name(<span class="text-danger">*</span>)</label>                                    
+                                        <input class="form-control" type="text" name="father_name" required>                                    
+                                </div>
+                                <div class="col-3 form-group">
+                                    <label>Mother Name(<span class="text-danger">*</span>)</label>                                    
+                                        <input class="form-control" type="text" name="mother_name" required>
+                                    <br>
+                                </div>
+                                <div class="col-3 form-group">
+                                    <label>Phone No(<span class="text-danger">*</span>)</label>                                    
+                                        <input class="form-control" type="text" name="phone_no" placeholder="Contact" max="100" required>
+                                </div>
+                                <div class="col-3 form-group">
+                                    <label>Father No(<span class="text-danger">*</span>)</label>                                    
+                                        <input class="form-control" type="text" name="father_no" placeholder="Contact" max="100" required>
+                                </div>
+                                <div class="col-3 form-group">
+                                    <label>Address(<span class="text-danger">*</span>)</label>
+                                        <input class="form-control" type="text" name="address" required>                                   
+                                </div>
+                            </div>
+                        </div>
+ 
+                        <div class="modal-footer">
+                            <button type="submit" id="button-2" class="btn btn-success btn-sm">Submit</button>
+                            <button type="button"  class="btn btn-light pull-left btn-flat" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </form>
+                </div>  
+        </div>
+    </div>
+</div>
+<div class="modal fade text-left " id="editNewProduct1" role="dialog" aria-labelledby="icc_modal" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="documents">
+        <div class="modal-content">
+            <form class="form form-horizontal" action="{% url 'update_details' %}" method="POST" enctype="multipart/form-data">
+                
+                <input type='hidden' name="editid" id="editdetailsid">
+                {% csrf_token %}
+                <div class="modal-header ">
+                    <h4 class="modal-title ">Edit Details</h4>
+                    {% comment %} <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true"></span>
+                    </button> {% endcomment %}
+                </div>
+                <div class="modal-body">
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Name(<span class="text-danger">*</span>)</label>
+                        <div class="col-sm-6">
+                            <input class="form-control" id="editname"type="text" name="stuname" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Class(<span class="text-danger">*</span>)</label>
+                        <div class="col-sm-6">
+                            <select class="form-control" id="editclass" type="text" name="stuclass" required>
+                                <option value="" selected="" >Select Class</option> 
+                                <option value="I">I</option>
+                                <option value="II">II</option>
+                                <option value="III">III</option>
+                                <option value="IV">IV</option>
+                                <option value="V">V</option>
+                                <option value="VI">VI</option>
+                                <option value="VII">VII</option>
+                                <option value="VIII">VIII</option>
+                                <option value="IX">IX</option>
+                                <option value="X">X</option>
+                                <option value="XI">XI</option>
+                                <option value="XII">XII</option> 
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">School(<span class="text-danger">*</span>)</label>
+                        <div class="col-sm-6">
+                            <input class="form-control" id="editschool"  type="text" name="stuschool" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">DOB(<span class="text-danger">*</span>)</label>
+                        <div class="col-sm-6">
+                            <input class="form-control" id="editdob" type="date" name="dob" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Age(<span class="text-danger">*</span>)</label>
+                        <div class="col-sm-6">
+                            <input class="form-control" id="editage" type="text" name="age" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Subject(<span class="text-danger">*</span>)</label>
+                        <div class="col-sm-6">
+                            <select class="form-select" data-control="select2" id="editsubject" name="stusubject" multiple="multiple">
+                                <option value="">Select Subject</option> 
+                                <option value="All">All</option>
+                                <option value="English">English</option>
+                                <option value="Tamil">Tamil</option>
+                                <option value="Maths">Maths</option>
+                                <option value="Science">Science</option> 
+                                <option value="Social">Social</option>
+                                <option value="Physics">Physics</option>
+                                <option value="Chemistry">Chemistry</option>
+                                <option value="Biology">Biology</option>
+                                <option value="Computer Scinece">Computer Scinece</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Father Name(<span class="text-danger">*</span>)</label>
+                        <div class="col-sm-6">
+                            <input class="form-control" type="text" name="father_name" id="editfathername" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Mother Name(<span class="text-danger">*</span>)</label>
+                        <div class="col-sm-6">
+                            <input class="form-control" type="text" id="editmothername" name="mother_name" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Phone No(<span class="text-danger">*</span>)</label>
+                        <div class="col-sm-6">
+                            <input class="form-control" id="editphoneno"type="text" name="phone_no" required>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Father No(<span class="text-danger">*</span>)</label>
+                        <div class="col-sm-6">
+                            <input class="form-control" id="editfatherno"type="text" name="father_no" required>
+                        </div>
+                    </div>
+                
+                    <div class="form-group row">
+                        <label class="col-sm-4 col-form-label">Address(<span class="text-danger">*</span>)</label>
+                        <div class="col-sm-6">
+                            <input class="form-control" id="editaddress" type="text" name="address" required>
+                        </div>
+                    </div>
+                                         
+                    </div>
+ 
+                <div class="modal-footer">
+                    <button type="submit" id="button-2" class="btn btn-success btn-sm">Submit</button>
+                    <button type="button"  class="btn btn-light pull-left btn-flat" data-bs-dismiss="modal">Close</button>
+                </div>
+                </div> 
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+{% block scripts %}
+
+<script>
+    $(".passing_idx").click(function () {
+    var ids = $(this).attr('data-id');
+    alert(ids)
+    $("#editdetailsid").val(ids)
+    
+    $('#editNewProduct1').modal('show');
+    $.get("/edit_details/" +ids, function(data) {
+        var dob=data.data[0].DOB;
+        con_dob = dob.toString();
+        dob_date=con_dob.substring(0, 10);
+        
+        $('#editname').val(data.data[0].Name);
+        $('#editclass').val(data.data[0].Class);
+        $('#editschool').val(data.data[0].School);
+        $('#editdob').val(dob_date);
+        $('#editage').val(data.data[0].Age);
+        // Loop through each subject in the array
+        var subjects = ["Maths", "Science", "History", "English"];
+        var selectedSubjects = (data.data[0].Subject).split(',');
+        subjects.forEach(function (subject) {
+            // Check if the current subject is in the selectedSubjects array
+            if (selectedSubjects.includes(subject)) {
+                // Set the 'selected' attribute for the matched option
+                $('#editsubject option[value="'+ subject +'"]').attr('selected', 'selected');
+            }
+        });
+        $('#editfathername').val(data.data[0].Father_name);
+        $('#editmothername').val(data.data[0].Mother_name);
+        $('#editphoneno').val(data.data[0].Phone_no);
+        $('#editfatherno').val(data.data[0].Father_phno);
+        $('#editaddress').val(data.data[0].Address);
+      });
+    })
+    
+    $(document).ready(function() {
+        $('#data-table').DataTable();
+    });
+    
+    </script>
+    
+{% endblock %}

@@ -19,6 +19,16 @@ from SP_Classes.views import *
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('',home,name='home'),
+    path('stu_detail',stu_detail,name='stu_detail'),
     path('accounts/login/', logins, name='logins'),
     path('accounts/logout/',logout_view,name='logout'),
+    path('feedback_save',feedback_save,name="feedback_save"),
+    path('feedback_table',feedback_table,name="feedback_table"), 
+    path('details_save',details_save,name="details_save"),
+    path('edit_details/<int:id>',edit_details,name="edit_details"),
+    path('update_details',update_details,name="update_details"),
+    path('delete_details/<int:id>',delete_details,name="delete_details"),
+    path('studetails_fileupload',studetails_fileupload,name="studetails_fileupload"),
+    path('create_and_download_excel',create_and_download_excel,name="create_and_download_excel"),
+
 ]

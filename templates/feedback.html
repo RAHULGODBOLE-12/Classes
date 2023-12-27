@@ -1,0 +1,35 @@
+{% extends 'home.html' %}{% load static %}
+{% block content %}
+
+
+<div class="table-responsive">
+	<table class="table table-hover table-rounded table-striped border gy-7 gs-7 export_table">
+		<thead>
+			<tr class="fw-semibold fs-6 text-gray-800 border-bottom-2 border-gray-200 ">
+				<th>Your Name</th>
+                <th>Your Email</th>
+                <th>Your Mobile No</th>
+                <th>Comments</th>
+			</tr>
+		</thead>
+		<tbody>
+            {% for addfeedback in data2 %}
+			<tr>
+				<td>{{addfeedback.Name}}</td>
+                <td>{{addfeedback.Email}}</td>
+                <td>{{addfeedback.Mobil_no}}</td> 
+                <td>{{addfeedback.Comments }}</td>  
+                <td>
+                    <a class="passing_ids" data-bs-toggle="modal" data-id="{{addfeedback.id}}" data-bs-target="#editNewProduct1"><i class="fa fa-edit"></i>
+                    </a> 
+                      
+                    <a href=""><i class = "fa fa-trash"></i></a>  
+                </td> 
+            
+			</tr>
+            {% endfor %} 
+		</tbody>
+	</table>
+</div>
+
+{%endblock%}
