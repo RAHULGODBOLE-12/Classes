@@ -16,6 +16,7 @@ import openpyxl
 from tkinter import messagebox
 from flask import Flask, send_file
 from io import BytesIO
+from django.contrib.auth.hashers import make_password
 
 
 def home(request):
@@ -112,6 +113,9 @@ def details_save(request):
                     Father_phno=request.POST.get("father_no"),
                     Address=request.POST.get("address"))
         x.save()
+        User(username=request.POST.get("stuname"),password = make_password('iness123')).save()
+        
+        
         messages.success(request, 'Your Details Saved Successfully')
         if request.user.is_superuser:
             return redirect("/stu_detail")
@@ -139,7 +143,6 @@ def update_details(request):
                     Address=request.POST.get("address"))
     # return render(request,"bom/edit_bom.html",{"Add_Details":y})
     return redirect("/stu_detail")
-
 
 
 def delete_details(request,id):
@@ -201,3 +204,64 @@ def create_and_download_excel(request):
             return response
     
 
+def Stu_marks(request):
+    detail9 = Add_marks.objects.filter(Class = 'IX').order_by('-Name')
+    detail10 = Add_marks.objects.filter(Class = 'X').order_by('-Name')
+    detail11 = Add_marks.objects.filter(Class = 'XI').order_by('-Name')
+    detail12 = Add_marks.objects.filter(Class = 'XII').order_by('-Name')
+    return render(request,"add_marks.html",{'data10':detail9,'data11':detail10,'data12':detail11,'data13':detail12})
+
+
+def get_stu_name(request):
+    Class = request.POST.get('get_class')
+    print(Class,'Class')
+    stu_name = Add_details.objects.filter(Class=Class).values_list('Name',flat=True)
+    print(stu_name)
+    
+    return JsonResponse(list(stu_name),safe=False)
+
+def marks_save(request):
+    if request.method == "POST":
+        a = Add_marks(Class = request.POST.get("stuclass"),Name = request.POST.get("stuname"),
+                      RollNo = request.POST.get("rollno"),English = request.POST.get("english"),
+                      Tamil = request.POST.get("tamil"),Maths = request.POST.get("maths"),
+                      Science = request.POST.get("science"),Social = request.POST.get("social"),
+                      Physics = request.POST.get("physics"),Chemistry = request.POST.get("social"),
+                      Biology = request.POST.get("social"),Computer_Science = request.POST.get("social"),
+                      All = request.POST.get("social"))
+        a.save()
+    return redirect('/Stu_marks')
+
+def marks_edit(request,id):
+    y = Add_marks.objects.filter(id=id).values()
+    return JsonResponse({'data':list(y)},safe=False )
+
+def marks_update(request):
+    id=request.POST.get('editid')
+    print(id,'id')
+    y = Add_marks.objects.filter(id=id).update(Class = request.POST.get("stuclass"),Name = request.POST.get("stuname"),
+                      RollNo = request.POST.get("rollno"),English = request.POST.get("english"),
+                      Tamil = request.POST.get("tamil"),Maths = request.POST.get("maths"),
+                      Science = request.POST.get("science"),Social = request.POST.get("social"))
+    return redirect("/Stu_marks")
+def marks_delete(request,id):
+    y = Add_marks.objects.get(id=id)
+    y.delete()
+    return redirect("/Stu_marks")
+
+def stu_result(request):
+    get_student = Add_details.objects.filter(Name = request.user.username)[:1].get()
+    print(get_student.Class)
+    data = Add_marks.objects.filter(Name = request.user.username).order_by('-Name')
+    return render(request,"result.html",{'data10':get_student,'data11':get_student,'data12':get_student,'data13':get_student,'result':data})
+
+def stu_subject_details(request):
+    Stu_name = request.POST.get('get_name')
+    Stu_Class = request.POST.get('get_class')
+    print(Stu_name,'name')
+    print(Stu_Class,'Class')
+    stu_subject = Add_details.objects.filter(Class=Stu_Class,Name=Stu_name).values_list('Subject',flat=True)
+    
+    for i in stu_subject:
+        subjects=i.split(',')
+    return JsonResponse(subjects,safe=False)

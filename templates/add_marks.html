@@ -1,0 +1,519 @@
+{% extends 'home.html' %}{% load static %}
+{% block content %}
+<div class="card card-flush">
+    <!--begin::Card header-->
+    <div class="card-header pt-7">
+        <!--begin::Title-->
+        <h3 class="card-title align-items-start flex-column">
+            <span class="card-label fw-bold text-gray-900">Add Student Marks</span>
+            <span class="text-gray-500 mt-1 fw-semibold fs-6"></span>
+        </h3>
+        <!--end::Title-->
+    </div>
+</div>
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Container-->
+    <div class="container-xxl" id="kt_content_container">
+    <!--begin::FAQ card-->
+        <div class="card">     
+        <!--begin::Body-->
+        {% if request.user.is_superuser %}
+            <div class="card-body">               
+                <div data-repeater-list="kt_docs_repeater_basic">
+                    <div data-repeater-item>
+                        <form action="{% url 'marks_save' %}" method='POST' >
+                            {% csrf_token %}
+                            <div class="form-group row">
+                                <div class="col-md-3">
+                                    <label class="form-label">Class</label>
+                                    <select name='stuclass' id='get_stu_name' type='text' class="form-control">
+                                        <option value="" selected="" >Select Class</option> 
+                                        <option value="IX">IX</option>
+                                        <option value="X">X</option>
+                                        <option value="XI">XI</option>
+                                        <option value="XII">XII</option>
+                                    </select> 
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Name</label>
+                                    <select name='stuname' type='text' id='get_subjects' class="form-control">
+                                        <option value="" selected="" >Select Name</option> 
+                                    </select>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Roll No</label>
+                                    <input class="form-control" type="number" max="1000" name="rollno" required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-3">
+                                    <label class="form-label">English</label>
+                                    <input class="form-control" type="number" max="100" id="englishid" name="english" disabled required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Tamil</label>
+                                    <input class="form-control" type="number" name="tamil" id="tamilid" max ="100" disabled required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Maths</label>
+                                    <input class="form-control" type="number" max="100" id='Mathsid' name="maths" disabled required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Science</label>
+                                    <input class="form-control" type="number" max="100" id='scienceid' name="science" disabled required>
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-3">
+                                    <label class="form-label">Social</label>
+                                    <input class="form-control" type="number" max="100" id='socialid' name="social" disabled required>
+                                </div>
+                                <div class="col-md-3">
+                                    <label class="form-label">Physics</label>
+                                    <input class="form-control" type="number" max="100" id='physicsid' name="physics" disabled required>
+                                </div>  
+                                <div class="col-md-3">
+                                    <label class="form-label">Chemistry</label>
+                                    <input class="form-control" type="number" max="100" id='chemistryid' name="chemistry" disabled required>
+                                </div>  
+                                <div class="col-md-3">
+                                    <label class="form-label">Biology</label>
+                                    <input class="form-control" type="number" max="100" id='biologyid' name="biology" disabled required>
+                                </div> 
+                            </div>
+                            <div class="form-group row">
+                                <div class="col-md-3">
+                                    <label class="form-label">Computer Science</label>
+                                    <input class="form-control" type="number" max="100" id='computerid' name="computer" disabled required>
+                                </div>
+                                <div class="col-md-3">
+                                    <br>
+                                    <br>
+                                    <button  class='btn btn-sm bg-primary text-white' type='submit'>Submit</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+            <ul class="nav nav-tabs nav-line-tabs fs-6">
+                <li class="nav-item">
+                    <a class="nav-link active" data-bs-toggle="tab" href="#kt_tab_pane_9">Class IX</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_10">Class X</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_11">Class XI</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_12">Class XII</a>
+                </li>
+            </ul>
+
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="kt_tab_pane_9" role="tabpanel">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-rounded table-striped border gy-7 gs-7">
+                            <thead>
+                                <tr class="fw-semibold fs-6 text-gray-800 border-bottom-2 border-gray-200">
+                                    <th>Name</th>
+                                    <th>Class</th>
+                                    <th>School</th>
+                                    <th>English</th>
+                                    <th>Tamil</th>
+                                    <th>Maths</th>
+                                    <th>Science</th>
+                                    <th>Social</th>
+                                    <th>Physics</th>
+                                    <th>Chemistry</th>
+                                    <th>Biology</th>
+                                    <th>Computer Science</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for AddMarks in data10 %}
+                                <tr>
+                                    <td>{{AddMarks.Name}}</td>
+                                    <td>{{AddMarks.Class}}</td>
+                                    <td>{{AddMarks.RollNo}}</td> 
+                                    <td>{{AddMarks.English}}</td>  
+                                    <td>{{AddMarks.Tamil}}</td> 
+                                    <td>{{AddMarks.Maths}}</td> 
+                                    <td>{{AddMarks.Science}}</td>
+                                    <td>{{AddMarks.Social}}</td>
+                                    <td>{{AddMarks.Physics}}</td>
+                                    <td>{{AddMarks.Chemistry}}</td>
+                                    <td>{{AddMarks.Biology}}</td>
+                                    <td>{{AddMarks.Computer Science}}</td>
+                                    <td>
+                                        <a class="passing_idx" data-bs-toggle="modal" data-id="{{AddMarks.id}}" data-bs-target="#editNewMarks"><i class="fa fa-edit"></i>
+                                        </a> 
+                                        
+                                        <a href="{% url 'marks_delete' AddMarks.id %}"><i class = "fa fa-trash"></i></a> 
+                        
+                                    </td>
+                                
+                                </tr>
+                                {% endfor %} 
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="kt_tab_pane_10" role="tabpanel">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-rounded table-striped border gy-7 gs-7">
+                            <thead>
+                                <tr class="fw-semibold fs-6 text-gray-800 border-bottom-2 border-gray-200">
+                                    <th>Name</th>
+                                    <th>Class</th>
+                                    <th>School</th>
+                                    <th>English</th>
+                                    <th>Tamil</th>
+                                    <th>Maths</th>
+                                    <th>Science</th>
+                                    <th>Social</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for AddMarks in data11 %}
+                                <tr>
+                                    <td>{{AddMarks.Name}}</td>
+                                    <td>{{AddMarks.Class}}</td>
+                                    <td>{{AddMarks.RollNo}}</td> 
+                                    <td>{{AddMarks.English}}</td>  
+                                    <td>{{AddMarks.Tamil}}</td> 
+                                    <td>{{AddMarks.Maths}}</td> 
+                                    <td>{{AddMarks.Science}}</td>
+                                    <td>{{AddMarks.Social}}</td>
+                                    <td>
+                                        <a class="passing_idx" data-bs-toggle="modal" data-id="{{AddMarks.id}}" data-bs-target="#editNewMarks"><i class="fa fa-edit"></i>
+                                        </a> 
+                                        
+                                        <a href="{% url 'marks_delete' AddMarks.id %}"><i class = "fa fa-trash"></i></a> 
+                        
+                                    </td>
+                                </tr>
+                                {% endfor %} 
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="kt_tab_pane_11" role="tabpanel">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-rounded table-striped border gy-7 gs-7">
+                            <thead>
+                                <tr class="fw-semibold fs-6 text-gray-800 border-bottom-2 border-gray-200">
+                                    <th>Name</th>
+                                    <th>Class</th>
+                                    <th>School</th>
+                                    <th>English</th>
+                                    <th>Tamil</th>
+                                    <th>Maths</th>
+                                    <th>Science</th>
+                                    <th>Social</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for AddMarks in data12 %}
+                                <tr>
+                                    <td>{{AddMarks.Name}}</td>
+                                    <td>{{AddMarks.Class}}</td>
+                                    <td>{{AddMarks.RollNo}}</td> 
+                                    <td>{{AddMarks.English}}</td>  
+                                    <td>{{AddMarks.Tamil}}</td> 
+                                    <td>{{AddMarks.Maths}}</td> 
+                                    <td>{{AddMarks.Science}}</td>
+                                    <td>{{AddMarks.Social}}</td>
+                                    <td>
+                                        <a class="passing_idx" data-bs-toggle="modal" data-id="{{AddMarks.id}}" data-bs-target="#editNewMarks"><i class="fa fa-edit"></i>
+                                        </a> 
+                                        
+                                        <a href="{% url 'marks_delete' AddMarks.id %}"><i class = "fa fa-trash"></i></a> 
+                        
+                                    </td> 
+                                
+                                </tr>
+                                {% endfor %} 
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane fade" id="kt_tab_pane_12" role="tabpanel">
+                    <div class="table-responsive">
+                        <table class="table table-hover table-rounded table-striped border gy-7 gs-7">
+                            <thead>
+                                <tr class="fw-semibold fs-6 text-gray-800 border-bottom-2 border-gray-200">
+                                    <th>Name</th>
+                                    <th>Class</th>
+                                    <th>School</th>
+                                    <th>English</th>
+                                    <th>Tamil</th>
+                                    <th>Maths</th>
+                                    <th>Science</th>
+                                    <th>Social</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for AddMarks in data13 %}
+                                <tr>
+                                    <td>{{AddMarks.Name}}</td>
+                                    <td>{{AddMarks.Class}}</td>
+                                    <td>{{AddMarks.RollNo}}</td> 
+                                    <td>{{AddMarks.English}}</td>  
+                                    <td>{{AddMarks.Tamil}}</td> 
+                                    <td>{{AddMarks.Maths}}</td> 
+                                    <td>{{AddMarks.Science}}</td>
+                                    <td>{{AddMarks.Social}}</td>
+                                    <td>
+                                        <a class="passing_idx" data-bs-toggle="modal" data-id="{{AddMarks.id}}" data-bs-target="#editNewMarks"><i class="fa fa-edit"></i>
+                                        </a> 
+                                        
+                                        <a href="{% url 'marks_delete' AddMarks.id %}"><i class = "fa fa-trash"></i></a> 
+                        
+                                    </td>
+                                
+                                </tr>
+                                {% endfor %} 
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade text-left " id="editNewMarks" role="dialog" aria-labelledby="icc_modal" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="documents">
+                    <div class="modal-content">
+                        <form class="form form-horizontal" action="{% url 'marks_update' %}" method="POST" enctype="multipart/form-data">
+                            
+                            <input type='hidden' name="editid" id="editmarksid">
+                            {% csrf_token %}
+                            <div class="modal-header ">
+                                <h4 class="modal-title ">Edit Marks</h4>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label">Name(<span class="text-danger">*</span>)</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" id="editname"type="text" name="stuname" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label">Class(<span class="text-danger">*</span>)</label>
+                                    <div class="col-sm-6">
+                                        <select class="form-control" id="editclass" type="text" name="stuclass" required>
+                                            <option value="" selected="" >Select Class</option> 
+                                            <option value="IX">IX</option>
+                                            <option value="X">X</option>
+                                            <option value="XI">XI</option>
+                                            <option value="XII">XII</option> 
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label">Roll No(<span class="text-danger">*</span>)</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" id="editrollno"  type="text" name="rollno" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label">All(<span class="text-danger">*</span>)</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" id="editall"type="text" name="all" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label">English(<span class="text-danger">*</span>)</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" id="editenglish" type="text" name="english" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label">Tamil(<span class="text-danger">*</span>)</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" id="edittamil" type="text" name="tamil" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label">Maths(<span class="text-danger">*</span>)</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" type="text" name="maths" id="editmaths" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label">Science(<span class="text-danger">*</span>)</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" type="text" id="editscience" name="science" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label">Social(<span class="text-danger">*</span>)</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" id="editsocial"type="text" name="social" required>
+                                    </div>
+                                </div>  
+                                <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label">Physics(<span class="text-danger">*</span>)</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" id="editphysics"type="text" name="physics" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label">Chemistry(<span class="text-danger">*</span>)</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" id="editchemistry"type="text" name="chemistry" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label">Biology(<span class="text-danger">*</span>)</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" id="editbiology"type="text" name="biology" required>
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-4 col-form-label">Computer Science(<span class="text-danger">*</span>)</label>
+                                    <div class="col-sm-6">
+                                        <input class="form-control" id="editcomputer"type="text" name="computer" required>
+                                    </div>
+                                </div>                      
+                            </div>
+             
+                            <div class="modal-footer">
+                                <button type="submit" id="button-2" class="btn btn-success btn-sm">Submit</button>
+                                <button type="button"  class="btn btn-light pull-left btn-flat" data-bs-dismiss="modal">Close</button>
+                            </div>
+                            </div> 
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+
+<script>
+    $("#get_stu_name").change(function () {
+        $("#Mathsid").prop('disabled', true);
+        $("#englishid").prop('disabled', true);
+        $("#tamilid").prop('disabled', true);
+        $("#scienceid").prop('disabled', true);
+        $("#socialid").prop('disabled', true);
+        $("#physicsid").prop('disabled', true);
+        $("#chemistryid").prop('disabled', true);
+        $("#biologyid").prop('disabled', true);
+        $("#computerid").prop('disabled', true);   
+    var get_class = $(this).val();
+
+  $.ajax({                    
+      type: "POST",
+      url: '{% url "get_stu_name" %}',
+      data: {
+          'get_class': get_class,       // add the country id to the POST parameters
+          'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+      },
+
+      success: function (data) {   // `data` is from `get_topics_ajax` view function
+          let html_data = '<option value="">Select</option>';
+          data.forEach(function (data) {
+              html_data += `<option value="${data}">${data}</option>`
+          });
+          $("#get_subjects").html(html_data); // replace the contents of the topic input with the data that came from the server
+      }
+  });
+});
+
+</script>
+<script>
+    $(".passing_idx").click(function () {
+        var ids = $(this).attr('data-id');
+        $("#editmarksid").val(ids)
+        $('#editNewMarks').modal('show');
+        $.get("/marks_edit/" +ids, function(data) {
+            $('#editname').val(data.data[0].Name);
+            $('#editclass').val(data.data[0].Class);
+            $('#editrollno').val(data.data[0].RollNo);
+            $('#editenglish').val(data.data[0].English);
+            $('#edittamil').val(data.data[0].Tamil);
+            $('#editmaths').val(data.data[0].Maths);
+            $('#editscience').val(data.data[0].Science);
+            $('#editsocial').val(data.data[0].Social);
+          });
+        })
+</script>
+
+
+<script>
+    $("#get_subjects").change(function () {
+
+        var get_name = $(this).val();
+        var get_class = $('#get_stu_name').val();
+    
+      $.ajax({                    
+          type: "POST",
+          url: '{% url "stu_subject_details" %}',
+          data: {
+               'get_name': get_name, 
+              'get_class': get_class,       // add the country id to the POST parameters
+              'csrfmiddlewaretoken':$('input[name=csrfmiddlewaretoken]').val(),
+            },
+            success: function(data) {  
+                data.forEach(function (data) {
+                    if(data == 'Maths'){
+                        $("#Mathsid").removeAttr("disabled")
+                    }
+                    else if (data == 'English'){
+                        $("#englishid").removeAttr("disabled")
+                    }
+                    else if (data == 'Tamil'){
+                        $("#tamilid").removeAttr("disabled")
+                    }
+                    else if (data == 'Science'){
+                        $("#scienceid").removeAttr("disabled")
+                    }
+                    else if (data == 'Social'){
+                        $("#socialid").removeAttr("disabled")
+                    }
+                    else if (data == 'Physics'){
+                        $("#physicsid").removeAttr("disabled")
+                    }
+                    else if (data == 'Chemistry'){
+                        $("#chemistryid").removeAttr("disabled")
+                    }
+                    else if (data == 'Biology'){
+                        $("#biologyid").removeAttr("disabled")
+                    }
+                    else if (data == 'Computer_Science'){
+                        $("#computerid").removeAttr("disabled")
+                    }
+                    else if(data == 'All'){
+                        $("#Mathsid").removeAttr("disabled")
+                        $("#englishid").removeAttr("disabled")
+                        $("#tamilid").removeAttr("disabled")
+                        $("#scienceid").removeAttr("disabled")
+                        $("#socialid").removeAttr("disabled")
+                        $("#physicsid").removeAttr("disabled")
+                        $("#chemistryid").removeAttr("disabled")
+                        $("#biologyid").removeAttr("disabled")
+                        $("#computerid").removeAttr("disabled")
+                    }
+
+            });
+          }
+      });
+    });
+    
+</script>
+{% endblock %}
+
+
+
+
+

@@ -30,5 +30,13 @@ urlpatterns = [
     path('delete_details/<int:id>',delete_details,name="delete_details"),
     path('studetails_fileupload',studetails_fileupload,name="studetails_fileupload"),
     path('create_and_download_excel',create_and_download_excel,name="create_and_download_excel"),
+    path('Stu_marks',Stu_marks,name='Stu_marks'),
+    path('get_stu_name',get_stu_name,name='get_stu_name'),
+    path('marks_save',marks_save,name='marks_save'),
+    path('marks_edit/<int:id>',marks_edit,name="marks_edit"),
+    path('marks_update',marks_update,name="marks_update"),
+    path('marks_delete/<int:id>',marks_delete,name="marks_delete"),
+    path('stu_result',stu_result,name='stu_result'),
+    path('stu_subject_details',stu_subject_details,name='stu_subject_details'),
 
 ]

@@ -1,0 +1,39 @@
+{% extends 'home.html' %}{% load static %}
+{% block content %}
+
+<div class="text-center mb-15">
+    <h1 class="fs-1hx text-dark mb-5">Result</h1>
+</div>
+
+<div class="table-responsive mt-5">
+	<table class="table table-hover table-rounded table-striped border gy-7 gs-7 export_table" id = "export_ppv_table">
+		<thead>
+			<tr class="fw-semibold fs-6 text-gray-800 border-bottom-2 border-gray-200">
+                <th>Name</th>
+                <th>Class</th>
+                <th>School</th>
+                <th>English</th>
+                <th>Tamil</th>
+                <th>Maths</th>
+                <th>Science</th>
+                <th>Social</th>
+			</tr>
+		</thead>
+		<tbody>
+            {% for Results in result %}
+			<tr>
+                <td>{{Results.Name}}</td>
+                <td>{{Results.Class}}</td>
+                <td>{{Results.RollNo}}</td> 
+                <td>{{Results.English}}</td>  
+                <td>{{Results.Tamil}}</td> 
+                <td>{{Results.Maths}}</td> 
+                <td>{{Results.Science}}</td>
+                <td>{{Results.Social}}</td>
+            
+			</tr>
+            {% endfor %} 
+		</tbody>
+	</table>
+</div>
+{% endblock %}

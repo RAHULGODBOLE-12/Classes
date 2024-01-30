@@ -28,7 +28,7 @@
 {% comment %} New {% endcomment %}
 <ul class="nav nav-tabs nav-line-tabs mb-5 fs-6">
     <li class="nav-item">
-        <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_9">Class IX</a>
+        <a class="nav-link active" data-bs-toggle="tab" href="#kt_tab_pane_9">Class IX</a>
     </li>
     <li class="nav-item">
         <a class="nav-link" data-bs-toggle="tab" href="#kt_tab_pane_10">Class X</a>
@@ -42,7 +42,7 @@
 </ul>
 
 <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade" id="kt_tab_pane_9" role="tabpanel">
+    <div class="tab-pane fade show active" id="kt_tab_pane_9" role="tabpanel">
         <div class="table-responsive">
             <table class="table table-hover table-rounded table-striped border gy-7 gs-7">
                 <thead>
@@ -259,7 +259,7 @@
 <div class="modal fade" id="addNewProduct1" role="dialog" aria-labelledby="icc_modal" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="documents">
         <div class="modal-content">
-                {% csrf_token %}
+                
                 <div class="modal-header ">
                     <h4 class="modal-title ">Add Details</h4>
                     {% comment %} <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -268,6 +268,7 @@
                 </div>
                 <div class="modal-body">
                     <form class="form form-horizontal" action="{% url 'details_save' %}" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
                         <div class="form-body">
                             <div class="row">
                                 <div class="col-3 form-group">
@@ -280,14 +281,6 @@
                                     <label>Class(<span class="text-danger">*</span>)</label>                                    
                                         <select class="form-control" type="text" name="stuclass" required>
                                             <option value="" selected="" >Select Class</option> 
-                                            <option value="I">I</option>
-                                            <option value="II">II</option>
-                                            <option value="III">III</option>
-                                            <option value="IV">IV</option>
-                                            <option value="V">V</option> 
-                                            <option value="VI">VI</option>
-                                            <option value="VII">VII</option>
-                                            <option value="VIII">VIII</option>
                                             <option value="IX">IX</option>
                                             <option value="X">X</option>
                                             <option value="XI">XI</option>
@@ -380,14 +373,6 @@
                         <div class="col-sm-6">
                             <select class="form-control" id="editclass" type="text" name="stuclass" required>
                                 <option value="" selected="" >Select Class</option> 
-                                <option value="I">I</option>
-                                <option value="II">II</option>
-                                <option value="III">III</option>
-                                <option value="IV">IV</option>
-                                <option value="V">V</option>
-                                <option value="VI">VI</option>
-                                <option value="VII">VII</option>
-                                <option value="VIII">VIII</option>
                                 <option value="IX">IX</option>
                                 <option value="X">X</option>
                                 <option value="XI">XI</option>
@@ -477,7 +462,6 @@
 
 {% endblock %}
 {% block scripts %}
-
 <script>
     $(".passing_idx").click(function () {
     var ids = $(this).attr('data-id');
@@ -513,10 +497,7 @@
       });
     })
     
-    $(document).ready(function() {
-        $('#data-table').DataTable();
-    });
     
-    </script>
+</script>
     
 {% endblock %}
